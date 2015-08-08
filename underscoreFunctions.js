@@ -25,17 +25,20 @@ var bind = function (fun, object) {
 // _.bindAll(buttonView, 'onClick', 'onHover');
 // // When the button is clicked, this.label will have the correct value.
 // jQuery('#underscore_button').bind('click', buttonView.onClick);
+
+//function seems to be bound properly but for some reason
+//methods are being deleted afterwards??
 var bindAll = function (object) {
-  
   var args = Array.prototype.slice.call(arguments).slice(1);
-
-  for(var i = 0; i < args.length; i ++) {
-    var method = object[args[i]];
-    if(method) {
-      method.apply(object, [args[i]]);
-    }
-
+  for(var i = 1; i < args.length; i ++) {
+    var key = args[i];
+    object[key] = bind(object[key], object);
   }
+  return object;
+}
+
+var partial = function (fun) {
+  
 }
 
 var memoize = function (fn) {
