@@ -17,9 +17,25 @@ var bind = function (fun, object) {
   }
 }
 
-var bindAll = function (fun, methodNames) {
+// var buttonView = {
+//   label  : 'underscore',
+//   onClick: function(){ alert('clicked: ' + this.label); },
+//   onHover: function(){ console.log('hovering: ' + this.label); }
+// };
+// _.bindAll(buttonView, 'onClick', 'onHover');
+// // When the button is clicked, this.label will have the correct value.
+// jQuery('#underscore_button').bind('click', buttonView.onClick);
+var bindAll = function (object) {
   
-  
+  var args = Array.prototype.slice.call(arguments).slice(1);
+
+  for(var i = 0; i < args.length; i ++) {
+    var method = object[args[i]];
+    if(method) {
+      method.apply(object, [args[i]]);
+    }
+
+  }
 }
 
 var memoize = function (fn) {
