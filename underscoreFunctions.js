@@ -9,8 +9,12 @@
 // func();
 // => 'hi: moe'
 
-var bind = function (function, object, arguments) {
-  
+var bind = function (fun, object) {
+  var args = Array.prototype.slice.call(arguments).slice(2);
+  console.log(args);
+  return function () {
+    return fun.apply(object, args);
+  }
 }
 
 var memoize = function (fn) {
