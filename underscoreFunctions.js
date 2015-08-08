@@ -17,6 +17,11 @@ var bind = function (fun, object) {
   }
 }
 
+var bindAll = function (fun, methodNames) {
+  
+  
+}
+
 var memoize = function (fn) {
       
   var memo = function () {
