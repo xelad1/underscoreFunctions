@@ -2,6 +2,36 @@
 //The goal here is to gain a better understanding of higher order
 //functions in JS
 
+// Bind a function to an object, meaning that whenever the function is called, the value of this will be the object. Optionally, pass arguments to the function to pre-fill them, also known as partial application. For partial application without context binding, use partial.
+
+// var func = function(greeting){ return greeting + ': ' + this.name };
+// func = _.bind(func, {name: 'moe'}, 'hi');
+// func();
+// => 'hi: moe'
+
+var bind = function (function, object, arguments) {
+  
+}
+
+var memoize = function (fn) {
+      
+  var memo = function () {
+    //we can't just set args to arguments here, if we do that then
+    //the variable is statically set to the argument passed in the first time
+    var args = Array.prototype.slice.call(arguments);
+
+    if (cache[args]) {
+      return cache[args];
+    } else {
+      cache[args] = fn.apply(this, args);
+      return cache[args];
+    }
+  }
+
+  var cache = {};
+  return memo;
+
+}
 //calls a function that as long as it is invoked will not be
 //triggered.  It will execute after it stops being called for
 //N milliseconds
@@ -44,23 +74,3 @@ var once = function (input) {
 }
 
 
-
-var memoize = function (fn) {
-      
-  var memo = function () {
-    //we can't just set args to arguments here, if we do that then
-    //the variable is statically set to the argument passed in the first time
-    var args = Array.prototype.slice.call(arguments);
-
-    if (cache[args]) {
-      return cache[args];
-    } else {
-      cache[args] = fn.apply(this, args);
-      return cache[args];
-    }
-  }
-
-  var cache = {};
-  return memo;
-
-}
