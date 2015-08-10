@@ -35,19 +35,22 @@ var bindAll = function (object) {
     object[key] = bind(object[key], object);
   }
   return object;
-}
+};
 
 var partial = function (fun) {
-  
-}
 
-var memoize = function (fn) {
-      
+};
+
+var fibonacci = function(n) { 
+  if (n <= 2){ return 1; } 
+  return fibonacci(n - 1) + fibonacci(n - 2);
+};
+
+var memoize = function (fn) {   
   var memo = function () {
     //we can't just set args to arguments here, if we do that then
     //the variable is statically set to the argument passed in the first time
     var args = Array.prototype.slice.call(arguments);
-
     if (cache[args]) {
       return cache[args];
     } else {
@@ -55,10 +58,21 @@ var memoize = function (fn) {
       return cache[args];
     }
   }
-
   var cache = {};
   return memo;
+};
 
+var delay = function (function, wait) {
+  
+
+}
+
+var defer = function (argument) {
+  // body...
+}
+
+var throttle = function (argument) {
+  // body...
 }
 //calls a function that as long as it is invoked will not be
 //triggered.  It will execute after it stops being called for
@@ -69,36 +83,27 @@ var memoize = function (fn) {
 //So that we can ACTUALLY call it as such
 
 var debounce = function (fun, wait, immediate) {
-  
-  // var callFunction;
   var timer;
-
   return function () {
     var args = Array.prototype.slice.call(arguments);
     var context = this;
     //when function is called, call it with set timeout.
     var applied = function() {
       fun.apply(context, args);
-    }
-    
+    }  
     clearTimeout(timer);
     timer = setTimeout(applied, wait);
   }
-}
+};
 
 var once = function (input) {
-
   var returned = false;
-
   return function() {
-
     if (!returned) {
       returned = true;
       return input.apply(this, arguments)
     };
-
   }
-
-}
+};
 
 
