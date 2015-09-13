@@ -11,7 +11,6 @@
 
 var bind = function (fun, object) {
   var args = Array.prototype.slice.call(arguments).slice(2);
-  console.log(args);
   return function () {
     return fun.apply(object, args);
   }
@@ -62,17 +61,24 @@ var memoize = function (fn) {
   return memo;
 };
 
+
 var delay = function (function, wait) {
   
 
 }
 
+//Akin to setting a setTimeout of 0.  Invokes a function AFTER the current call stack has cleared.
 var defer = function (argument) {
   // body...
 }
 
-var throttle = function (argument) {
-  // body...
+//Only calls the original functino at most per every wait milliseconds
+//Rate-limiting
+//can pass {leading: false} to disable leading edge call
+//can pass {trailing: false} to disable training edge call
+var throttle = function (function, wait, options) {
+
+  
 }
 //calls a function that as long as it is invoked will not be
 //triggered.  It will execute after it stops being called for
